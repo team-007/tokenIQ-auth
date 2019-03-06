@@ -1,0 +1,6 @@
+<Page loaded="pageLoaded" class="page" xmlns="http://www.nativescript.org/tns.xsd">
+	<ActionBar title="Your App"></ActionBar>
+	<StackLayout>
+		<Label class="body m-20" text="{{ message }}" textWrap="true"></Label>
+	</StackLayout>
+</Page>
