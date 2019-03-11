@@ -7,10 +7,10 @@
 
 		</StackLayout>
 
-		<Label class="sign-up-label">
+		<Label class="sign-up-label" tap="{{ signup }}">
 			<FormattedString>
 				<Span text="Don't have an account? "/>
-				<Span class="sign-up-link" text="Sign up" tap="{{ signup }}"/>
+				<Span class="sign-up-link" text="Sign up"/>
 				<Span text=" on WordPress"/>
 			</FormattedString>
 		</Label>

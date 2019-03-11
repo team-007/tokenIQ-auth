@@ -1,7 +1,5 @@
 const observableModule = require("data/observable");
-const dialogsModule = require("ui/dialogs");
-const userService = require("~/services/user-service");
-const topmost = require("ui/frame").topmost;
+const utilityModule = require('tns-core-modules/utils/utils');
 
 function LoginViewModel() {
     const viewModel = observableModule.fromObject({
@@ -9,7 +7,7 @@ function LoginViewModel() {
             //  TODO: call WordPress log in here, then open ./home/home-page
         },
         signup() {
-        //    TODO: open browser and set address to WordPress sign up page
+            utilityModule.openUrl('https://wordpress.com/start/user?ref=homepage');
         }
     });
 
