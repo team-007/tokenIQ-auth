@@ -2,8 +2,14 @@
 	<FlexboxLayout class="page">
 		<StackLayout class="form">
 			<Image class="logo" src="~/images/logo.png"/>
+			<StackLayout class="input-field">
+				<TextField text="{{ username }}" class="input" hint="Username" autocorrect="false" autocapitalizationType="none"/>
+			</StackLayout>
 
-			<Button text="Log In With WordPress" tap="{{ login }}" class="btn btn-primary m-t-20"/>
+			<StackLayout class="input-field">
+				<TextField text="{{ password }}" class="input" hint="Password" autocapitalizationType="none" autocorrect="false" secure="true" returnKeyType="done" returnPress="{{ login }}"/>
+			</StackLayout>
+			<Button text="Log In" tap="{{ login }}" class="btn btn-primary m-t-20"/>
 
 		</StackLayout>
 
