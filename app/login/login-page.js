@@ -1,4 +1,4 @@
-const frameModule = require("ui/frame");
+const frameModule = require("tns-core-modules/ui/frame");
 const LoginViewModel = require("./login-view-model");
 
 const loginViewModel = new LoginViewModel();

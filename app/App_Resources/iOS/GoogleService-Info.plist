@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1054476361904-qkkofm36l0mm7gas5mlvibkfa5ve1dmf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1054476361904-qkkofm36l0mm7gas5mlvibkfa5ve1dmf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDGeI6DOkhtZvbw8butkh__teoDbYVuJxg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1054476361904</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.nativescript.playjs</string>
+	<key>PROJECT_ID</key>
+	<string>tokeniqcapstone</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tokeniqcapstone.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1054476361904:ios:3ce56b0f6d13ae38</string>
+	<key>DATABASE_URL</key>
+	<string>https://tokeniqcapstone.firebaseio.com</string>
+</dict>
+</plist>

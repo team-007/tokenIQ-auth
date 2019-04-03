@@ -1,5 +1,5 @@
-const observableModule = require("data/observable");
-const dialogsModule = require("ui/dialogs");
+const observableModule = require("tns-core-modules/data/observable");
+const dialogsModule = require("tns-core-modules/ui/dialogs");
 
 function HomeViewModel() {
   const viewModel = observableModule.fromObject({

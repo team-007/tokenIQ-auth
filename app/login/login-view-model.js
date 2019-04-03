@@ -1,4 +1,4 @@
-const observableModule = require("data/observable");
+const observableModule = require("tns-core-modules/data/observable");
 const utilityModule = require('tns-core-modules/utils/utils');
 const http = require('tns-core-modules/http');
 
