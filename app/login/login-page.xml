@@ -1,0 +1,25 @@
+<Page loaded="pageLoaded" class="page" actionBarHidden="true" xmlns="http://www.nativescript.org/tns.xsd">
+    <FlexboxLayout class="page">
+        <StackLayout class="form">
+            <Image class="logo" src="~/images/logo.png"/>
+            <StackLayout class="input-field">
+                <TextField text="{{ username }}" class="input" hint="Username" autocorrect="false" autocapitalizationType="none"/>
+            </StackLayout>
+
+            <StackLayout class="input-field">
+                <TextField text="{{ password }}" class="input" hint="Password" autocapitalizationType="none" autocorrect="false" secure="true" returnKeyType="done" returnPress="{{ login }}"/>
+            </StackLayout>
+            <!-- TODO: show loading on click -->
+            <Button text="Log In" tap="{{ login }}" class="btn btn-primary m-t-20"/>
+
+        </StackLayout>
+
+        <Label class="sign-up-label" tap="{{ signup }}">
+            <FormattedString>
+                <Span text="Don't have an account? "/>
+                <Span class="sign-up-link" text="Sign up"/>
+                <Span text=" on WordPress"/>
+            </FormattedString>
+        </Label>
+    </FlexboxLayout>
+</Page>

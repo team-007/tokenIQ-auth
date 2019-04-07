@@ -1,0 +1,24 @@
+<Page loaded="pageLoaded" class="page" xmlns="http://www.nativescript.org/tns.xsd">
+	<ActionBar title="Groceries"></ActionBar>
+	<GridLayout rows="auto, *" xmlns:chart="nativescript-ui-chart" style="height: 1000px">
+		<chart:RadCartesianChart id="cartesianChart" style="height: 100%">
+			<chart:RadCartesianChart.series>
+				<chart:BarSeries items="{{ favoriteFruits }}" categoryProperty="type" valueProperty="count" seriesName="Bar">
+					<chart:BarSeries.horizontalAxis>
+						<chart:CategoricalAxis labelSize="40" labelMargin="10" />
+					</chart:BarSeries.horizontalAxis>
+					<chart:BarSeries.verticalAxis>
+						<chart:LinearAxis/>
+					</chart:BarSeries.verticalAxis>
+				</chart:BarSeries>
+			</chart:RadCartesianChart.series>
+			<chart:RadCartesianChart.palettes>
+				<chart:Palette seriesName="Bar">
+					<chart:Palette.entries>
+						<chart:PaletteEntry fillColor="#db5560" strokeColor="#bb1616" />
+					</chart:Palette.entries>
+				</chart:Palette>
+			</chart:RadCartesianChart.palettes>
+		</chart:RadCartesianChart>
+	</GridLayout>
+</Page>
