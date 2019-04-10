@@ -1,7 +1,7 @@
-var observableModule = require("tns-core-modules/data/observable");
+const observableModule = require("tns-core-modules/data/observable");
 
 function HomeViewModel() {
-  var viewModel = observableModule.fromObject({
+  const viewModel = observableModule.fromObject({
 
     favoriteFruits: [
       { type: "🍎", count: 7 },
@@ -11,7 +11,6 @@ function HomeViewModel() {
       { type: "🍇", count: 16 }
     ]
   });
-
   return viewModel;
 }
 

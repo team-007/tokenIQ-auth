@@ -17,8 +17,9 @@ function LoginViewModel() {
             }).then((response) => {
                 const result = response.content.toJSON();
                 console.log(result);
+                //TODO: send result to push-view-model for attaching registration token to user
                 topmost().navigate({
-                    moduleName: 'home/home-page',
+                    moduleName: 'push-notification/push-notification-page',
                     clearHistory: true
                 })
             }, (e) => {

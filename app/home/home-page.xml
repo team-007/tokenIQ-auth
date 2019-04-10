@@ -1,4 +1,4 @@
-<Page loaded="pageLoaded" class="page" xmlns="http://www.nativescript.org/tns.xsd">
+<Page loaded="pageLoaded"  class="page" xmlns="http://www.nativescript.org/tns.xsd">
 	<ActionBar title="Groceries"></ActionBar>
 	<GridLayout rows="auto, *" xmlns:chart="nativescript-ui-chart" style="height: 1000px">
 		<chart:RadCartesianChart id="cartesianChart" style="height: 100%">

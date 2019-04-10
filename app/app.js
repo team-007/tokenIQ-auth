@@ -6,6 +6,8 @@ purpose of the file is to pass control to the app’s first module.
 
 let application = require("tns-core-modules/application");
 
+require("nativescript-plugin-firebase");
+
 application.run({ moduleName: "app-root" });
 
 /*
