@@ -1,3 +1,5 @@
 node_modules
 platforms
 .idea/
+Pods/Local Podspecs/
+app/App_Resources/iOS/GoogleService-Info.plist
