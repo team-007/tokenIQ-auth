@@ -1,6 +1,7 @@
 const { messaging } = require("nativescript-plugin-firebase/messaging");
 const { alert, confirm } = require("tns-core-modules/ui/dialogs");
 const applicationSettings = require("tns-core-modules/application-settings");
+const http = require('tns-core-modules/http')
 
 function PushNotification() {
     let APP_REGISTERED_FOR_NOTIFICATIONS = "APP_REGISTERED_FOR_NOTIFICATIONS";
@@ -11,6 +12,18 @@ function PushNotification() {
                 onPushTokenReceivedCallback: token => {
                     //TODO: send token to backend and attach to user.
                     //reference: login-view-model for how to use http to send token to "server-url/save_reg_token"
+                    http.request({
+                        url: "https://tokeniq.herokuapp.com/retriveToken",
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        content: JSON.stringify({
+                            token: token
+                        })
+                    }).then(response => {
+
+                    }).catch(e => {
+
+                    })
                     console.log("Firebase plugin received a push token: " + token);
                     resolve()
                 },
