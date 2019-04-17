@@ -5,10 +5,15 @@ const topmost = require('tns-core-modules/ui/frame').topmost;
 exports.pageLoaded = function (args) {
     const page = args.object;
     page.bindingContext = observableModule.fromObject({});
+    let navigationContext = page.navigationContext;
+    let user = {
+        username: navigationContext.username,
+        usertoken: navigationContext.usertoken
+    };
+
     let pushNotification = new PushNotification();
-    console.log('Starting push notification initialization');
+    pushNotification.setUser(user);
     pushNotification.init().then(() => {
-        console.log('Done initialization of push notification');
         topmost().navigate({
             moduleName: 'home/home-page',
             clearHistory: true

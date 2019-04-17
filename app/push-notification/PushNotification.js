@@ -5,26 +5,42 @@ const http = require('tns-core-modules/http')
 
 function PushNotification() {
     let APP_REGISTERED_FOR_NOTIFICATIONS = "APP_REGISTERED_FOR_NOTIFICATIONS";
+    let USER = null;
+
+    this.setUser = user => {
+        USER = user;
+    };
+
+    function sendTokenToBackend(token) {
+        if (!USER) {
+            alert({
+                title: 'Internal Error',
+                message: 'Make sure you\'re logged in',
+                okButtonText: 'Alright'
+            });
+            return console.error('No user available');
+        }
+        http.request({
+            url: "https://tokeniq.herokuapp.com/retrieveToken",
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            content: JSON.stringify({
+                push_token: token,
+                username: USER.username,
+                user_token: USER.usertoken
+            })
+        }).then(response => {
+            if (response.statusCode !== 202) {
+                console.error('Unable to send token to server');
+            }
+        }).catch(console.error);
+    }
 
     this.doRegisterForPushNotifications = function () {
         return new Promise((resolve, reject) => {
             messaging.registerForPushNotifications({
                 onPushTokenReceivedCallback: token => {
-                    //TODO: send token to backend and attach to user.
-                    //reference: login-view-model for how to use http to send token to "server-url/save_reg_token"
-                    http.request({
-                        url: "https://tokeniq.herokuapp.com/retriveToken",
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        content: JSON.stringify({
-                            token: token
-                        })
-                    }).then(response => {
-
-                    }).catch(e => {
-
-                    })
-                    console.log("Firebase plugin received a push token: " + token);
+                    sendTokenToBackend(token);
                     resolve()
                 },
 
@@ -41,7 +57,7 @@ function PushNotification() {
                 },
 
                 // if true, the plugin we are using for firebase will automatically show the notification. if false, then we would have to handle how notification is shown
-                showNotifications: true,
+                showNotifications: false,
 
                 // Whether we want the firebase plugin to always handle the notifications when the app is in foreground.
                 // Currently used on iOS only. Default false.
