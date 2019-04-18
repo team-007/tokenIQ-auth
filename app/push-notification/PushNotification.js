@@ -24,10 +24,12 @@ function PushNotification() {
             url: "https://tokeniq.herokuapp.com/retrieveToken",
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            //TODO: for actual TokenIQ, DON'T SEND PASSWORD!!
             content: JSON.stringify({
-                push_token: token,
+                pushtoken: token,
                 username: USER.username,
-                user_token: USER.usertoken
+                password: USER.password,
+                usertoken: USER.usertoken
             })
         }).then(response => {
             if (response.statusCode !== 202) {
