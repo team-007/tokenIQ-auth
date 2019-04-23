@@ -11,6 +11,7 @@
             </StackLayout>
             <!-- TODO: show loading on click -->
             <Button text="Log In" tap="{{ login }}" class="btn btn-primary m-t-20"/>
+            <ActivityIndicator busy="{{ isLoading }}" />
 
         </StackLayout>
 
