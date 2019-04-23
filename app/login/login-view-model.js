@@ -32,14 +32,27 @@ function LoginViewModel() {
                   dialogs.alert("Invalid username or password");
                 }
                 else {
-                  console.log(response.content);
-                  topmost().navigate({
-                      moduleName: 'push-notification/push-notification-page',
-                      clearHistory: true,
-                      context: {
-                          username: result.username,
-                          usertoken: result.token
-                      }
+                  http.request({
+                    url: "https://tokeniq.herokuapp.com/authenticate",
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    content: JSON.stringify({
+                        username: viewModel.get('username'),
+                        password: viewModel.get('password')
+                    })
+                  }).then((response) => {
+                    const result = response.content.toJSON();
+                    console.log(response.content);
+                    topmost().navigate({
+                        moduleName: 'push-notification/push-notification-page',
+                        clearHistory: true,
+                        context: {
+                            username: result.username,
+                            usertoken: result.token
+                        }
+                    })
+                  }, (e) => {
+                      console.error(e);
                   });
                 }
             }, (e) => {
