@@ -1,7 +1,12 @@
 const { messaging } = require("nativescript-plugin-firebase/messaging");
 const { alert, confirm } = require("tns-core-modules/ui/dialogs");
 const applicationSettings = require("tns-core-modules/application-settings");
+<<<<<<< HEAD
+const application = require("tns-core-modules/application");
+const topmost = require('tns-core-modules/ui/frame').topmost;
+=======
 const http = require('tns-core-modules/http')
+>>>>>>> e06ab8286a2a299eef0fc6286ad05325fb3429f8
 
 function PushNotification() {
     let APP_REGISTERED_FOR_NOTIFICATIONS = "APP_REGISTERED_FOR_NOTIFICATIONS";
@@ -56,6 +61,38 @@ function PushNotification() {
                             okButtonText: "Sw33t"
                         }).then(resolve).catch(reject);
                     }, 500);
+
+                    // app was launched
+                  application.on(application.launchEvent, (args) => {
+                        if (args.android) {
+                            // For Android applications, args.android is an android.content.Intent class.
+                            console.log("Launched Android application with the following intent: " + args.android + ".");
+                        } else if (args.ios !== undefined) {
+                            // For iOS applications, args.ios is NSDictionary (launchOptions).
+                            console.log("Launched iOS application with options: " + args.ios);
+                        }
+
+                      topmost().navigate({
+                          moduleName: 'login/login-page',
+                          clearHistory: true
+                      })
+                    });
+
+                    // app was in background, now reopened...
+                    application.on(application.resumeEvent, (args) => {
+                        if (args.android) {
+                            // For Android applications, args.android is an android activity class.
+                            console.log("Activity: " + args.android);
+                        } else if (args.ios) {
+                            // For iOS applications, args.ios is UIApplication.
+                            console.log("UIApplication: " + args.ios);
+                        }
+
+                        topmost().navigate({
+                            moduleName: 'login/login-page',
+                            clearHistory: true
+                        })
+                    });
                 },
 
                 // if true, the plugin we are using for firebase will automatically show the notification. if false, then we would have to handle how notification is shown
