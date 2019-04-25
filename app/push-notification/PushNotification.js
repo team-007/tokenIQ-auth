@@ -124,6 +124,7 @@ function PushNotification() {
             messaging.getCurrentPushToken()
                 .then(token => {
                     // may be null/undefined if not known yet
+                    console.log('App push token: ', token);
                     alert({
                         title: "Current Push Registration Token",
                         message: (!token ? "Not received yet" : ("Token: \n\n") + token),
@@ -155,7 +156,6 @@ function PushNotification() {
             else {
                 console.log('App is registered! Getting registration token ...');
                 this.doGetCurrentToken().then(resolve);
-                resolve();
             }
         })
     };
