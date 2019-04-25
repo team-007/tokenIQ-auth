@@ -1,10 +1,21 @@
 const observableModule = require("tns-core-modules/data/observable");
 const utilityModule = require('tns-core-modules/utils/utils');
 const http = require('tns-core-modules/http');
-const dialogs = require("tns-core-modules/ui/dialogs");
+const {alert, confirm} = require("tns-core-modules/ui/dialogs");
 const ActivityIndicator = require("tns-core-modules/ui/activity-indicator").ActivityIndicator;
 const frameModule = require("tns-core-modules/ui/frame");
 const topmost = require('tns-core-modules/ui/frame').topmost;
+
+function goToPushNotificationPage(user) {
+    topmost().navigate({
+        moduleName: 'push-notification/push-notification-page',
+        clearHistory: true,
+        context: {
+            username: user.username,
+            usertoken: user.token
+        }
+    })
+}
 
 function LoginViewModel() {
     isLoading = false;
@@ -12,52 +23,48 @@ function LoginViewModel() {
         isLoading,
         login() {
             viewModel.isLoading = true;
+
+            let username = viewModel.get('username'),
+                password = viewModel.get('password');
+
             http.request({
                 url: "https://interns-tiq-invest-sandboxes.pantheonsite.io/wp-json/aam/v1/authenticate",
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 content: JSON.stringify({
-                    username: viewModel.get('username'),
-                    password: viewModel.get('password')
+                    username: username,
+                    password: password
                 })
             }).then((response) => {
-                //const result = response.content.toJSON();
-                var resp_str = String(response.content);
-                console.log(resp_str);
-
-                viewModel.isLoading = false;
-
-                if(resp_str.substring(1, 9) == "<strong>" || resp_str == '""') {
-                  //console.log("ree");
-                  dialogs.alert("Invalid username or password");
+                let responseAsString = String(response.content);
+                if(responseAsString.substring(1, 9) === "<strong>" || responseAsString === '""') {
+                    confirm({
+                        title: 'Log In Error',
+                        message: 'Error authenticating user with TokenIQ.',
+                        okButtonText: 'Try test server',
+                        cancelButtonText: 'Don\'t try test server'
+                    }).then(result => {
+                        if (!result) return;
+                        http.request({
+                            url: "https://tokeniq.herokuapp.com/authenticate",
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            content: JSON.stringify({
+                                username: username,
+                                password: password
+                            })
+                        }).then((response) => {
+                            if (response.statusCode !== 202) return alert('Error authenticating user with test server.');
+                            viewModel.isLoading = false;
+                            goToPushNotificationPage(response.content.toJSON());
+                        }, console.error);
+                    });
                 }
                 else {
-                  http.request({
-                    url: "https://tokeniq.herokuapp.com/authenticate",
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    content: JSON.stringify({
-                        username: viewModel.get('username'),
-                        password: viewModel.get('password')
-                    })
-                  }).then((response) => {
-                    const result = response.content.toJSON();
-                    console.log(response.content);
-                    topmost().navigate({
-                        moduleName: 'push-notification/push-notification-page',
-                        clearHistory: true,
-                        context: {
-                            username: result.username,
-                            usertoken: result.token
-                        }
-                    })
-                  }, (e) => {
-                      console.error(e);
-                  });
+                    viewModel.isLoading = false;
+                    goToPushNotificationPage(response.content.toJSON());
                 }
-            }, (e) => {
-                console.error(e);
-            });
+            }, console.error);
         },
         signup() {
             utilityModule.openUrl('https://wordpress.com/start/user?ref=homepage');

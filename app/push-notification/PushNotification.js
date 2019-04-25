@@ -1,7 +1,7 @@
 const { messaging } = require("nativescript-plugin-firebase/messaging");
 const { alert, confirm } = require("tns-core-modules/ui/dialogs");
 const applicationSettings = require("tns-core-modules/application-settings");
-const http = require('tns-core-modules/http')
+const http = require('tns-core-modules/http');
 
 function PushNotification() {
     let APP_REGISTERED_FOR_NOTIFICATIONS = "APP_REGISTERED_FOR_NOTIFICATIONS";
@@ -24,12 +24,10 @@ function PushNotification() {
             url: "https://tokeniq.herokuapp.com/retrieveToken",
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            //TODO: for actual TokenIQ, DON'T SEND PASSWORD!!
             content: JSON.stringify({
                 pushtoken: token,
                 username: USER.username,
-                password: USER.password,
-                usertoken: USER.usertoken
+                token: USER.usertoken
             })
         }).then(response => {
             if (response.statusCode !== 202) {

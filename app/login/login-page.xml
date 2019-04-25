@@ -9,7 +9,6 @@
             <StackLayout class="input-field">
                 <TextField text="{{ password }}" class="input" hint="Password" autocapitalizationType="none" autocorrect="false" secure="true" returnKeyType="done" returnPress="{{ login }}"/>
             </StackLayout>
-            <!-- TODO: show loading on click -->
             <Button text="Log In" tap="{{ login }}" class="btn btn-primary m-t-20"/>
             <ActivityIndicator busy="{{ isLoading }}" />
 
