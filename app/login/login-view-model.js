@@ -28,7 +28,7 @@ function LoginViewModel() {
                 password = viewModel.get('password');
 
             http.request({
-                url: "https://interns-tiq-invest-sandboxes.pantheonsite.io/wp-json/aam/v1/authenticate",
+                url: "https://dev-tiq-develop.pantheonsite.io/wp-json/aam/v1/authenticate",
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 content: JSON.stringify({
