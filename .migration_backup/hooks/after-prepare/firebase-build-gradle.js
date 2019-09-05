@@ -4,7 +4,7 @@ var fs = require("fs");
 module.exports = function($logger, $projectData) {
 
     return new Promise(function(resolve, reject) {
-        $logger.info("Configure firebase");
+        $logger.out("Configure firebase");
         let projectBuildGradlePath = path.join($projectData.platformsDir, "android", "build.gradle");
         if (fs.existsSync(projectBuildGradlePath)) {
             let buildGradleContent = fs.readFileSync(projectBuildGradlePath).toString();
@@ -33,7 +33,7 @@ module.exports = function($logger, $projectData) {
 
             let gradlePattern = /classpath ('|")com\.android\.tools\.build:gradle:\d+\.\d+\.\d+('|")/;
             let googleServicesPattern = /classpath ('|")com\.google\.gms:google-services:\d+\.\d+\.\d+('|")/;
-            let latestGoogleServicesPlugin = 'classpath "com.google.gms:google-services:4.3.0"';
+            let latestGoogleServicesPlugin = 'classpath "com.google.gms:google-services:4.2.0"';
             if (googleServicesPattern.test(buildGradleContent)) {
                 buildGradleContent = buildGradleContent.replace(googleServicesPattern, latestGoogleServicesPlugin);
             } else {
@@ -52,34 +52,29 @@ module.exports = function($logger, $projectData) {
             appBuildGradleContent = appBuildGradleContent.replace("ensureMetadataOutDir.finalizedBy(buildMetadata)", "ensureMetadataOutDir.finalizedBy(buildMetadata)\n\t\tbuildMetadata.finalizedBy(copyMetadata)");
             appBuildGradleContent += `
 task copyMetadata {
-  doFirst {
-      // before tns-android 5.2.0 its gradle version didn't have this method implemented, so pri
-      android.applicationVariants.all { variant ->
-          if (variant.buildType.name == project.selectedBuildType) {
-              def task
-              if (variant.metaClass.respondsTo(variant, "getMergeAssetsProvider")) {
-                  def provider = variant.getMergeAssetsProvider()
-                  task = provider.get();
-              } else {
-                  // fallback for older android gradle plugin versions
-                  task = variant.getMergeAssets()
-              }
-              for (File file : task.getOutputs().getFiles()) {
-                  if (!file.getPath().contains("/incremental/")) {
-                      project.ext.mergedAssetsOutputPath = file.getPath()
-                  }
-              }
-          }
-      }
-  }
   doLast {
     copy {
-      if (!project.mergedAssetsOutputPath) {
-        // mergedAssetsOutputPath not found fallback to the default value for android gradle plugin 3.4.0
-        project.ext.mergedAssetsOutputPath = "$projectDir/build/intermediates/assets/" + project.selectedBuildType + "/out"
-      }
-      from "$projectDir/src/main/assets/metadata"
-      into project.mergedAssetsOutputPath + "/metadata"
+        from "$projectDir/src/main/assets/metadata"
+        def toDir = project.hasProperty("release") ? "release" : "debug"
+        def toAssetsDir = "assets"
+
+        if (new File("$projectDir/build/intermediates/merged_assets").listFiles() != null) {
+          toAssetsDir = "merged_assets"
+          toDir = new File("$projectDir/build/intermediates/merged_assets").listFiles()[0].name
+          if (toDir == 'debug') {
+            toDir += "/mergeDebugAssets"
+          } else {
+            toDir += "/mergeReleaseAssets"
+          }
+          toDir += "/out"
+        } else if (new File("$projectDir/build/intermediates/assets").listFiles() != null) {
+          toDir = new File("$projectDir/build/intermediates/assets").listFiles()[0].name
+          if (toDir != 'debug' && toDir != 'release') {
+            toDir += "/release"
+          }
+        }
+
+        into "$projectDir/build/intermediates/" + toAssetsDir + "/" + toDir + "/metadata"
     }
   }
 }`;

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1054476361904",
+    "firebase_url": "https://tokeniqcapstone.firebaseio.com",
+    "project_id": "tokeniqcapstone",
+    "storage_bucket": "tokeniqcapstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054476361904:android:3ce56b0f6d13ae38",
+        "android_client_info": {
+          "package_name": "org.nativescript.playjs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1054476361904-h0j8jva6090cful31q0vjsq1fi6na5pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtBHjIPF0dw-yTzBT4L8Xc0c5nlq75Pa4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1054476361904-h0j8jva6090cful31q0vjsq1fi6na5pf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1054476361904-jr66nufpq323dororu1d267ofnhlupc8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org."
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

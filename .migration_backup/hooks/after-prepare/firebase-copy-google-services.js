@@ -7,24 +7,22 @@ module.exports = function($logger, $projectData, hookArgs) {
 return new Promise(function(resolve, reject) {
 
         /* Decide whether to prepare for dev or prod environment */
-        var isReleaseBuild = (hookArgs.appFilesUpdaterOptions || hookArgs.prepareData).release;
+
+        var isReleaseBuild = (hookArgs.appFilesUpdaterOptions && hookArgs.appFilesUpdaterOptions.release) ? true : false;
         var validProdEnvs = ['prod','production'];
         var isProdEnv = false; // building with --env.prod or --env.production flag
-        var env = (hookArgs.platformSpecificData || hookArgs.prepareData).env;
 
-        if (env) {
-            Object.keys(env).forEach((key) => {
+        if (hookArgs.platformSpecificData.env) {
+            Object.keys(hookArgs.platformSpecificData.env).forEach((key) => {
                 if (validProdEnvs.indexOf(key)>-1) { isProdEnv=true; }
             });
         }
 
         var buildType = isReleaseBuild || isProdEnv ? 'production' : 'development';
-        const platformFromHookArgs = hookArgs && (hookArgs.platform || (hookArgs.prepareData && hookArgs.prepareData.platform));
-        const platform = (platformFromHookArgs  || '').toLowerCase();
 
         /* Create info file in platforms dir so we can detect changes in environment and force prepare if needed */
 
-        var npfInfoPath = path.join($projectData.platformsDir, platform, ".pluginfirebaseinfo");
+        var npfInfoPath = path.join($projectData.platformsDir, hookArgs.platform.toLowerCase(), ".pluginfirebaseinfo");
         var npfInfo = {
             buildType: buildType,
         };
@@ -37,7 +35,7 @@ return new Promise(function(resolve, reject) {
 
         /* Handle preparing of Google Services files */
 
-        if (platform === 'android') {
+        if (hookArgs.platform.toLowerCase() === 'android') {
             var destinationGoogleJson = path.join($projectData.platformsDir, "android", "app", "google-services.json");
             var destinationGoogleJsonAlt = path.join($projectData.platformsDir, "android", "google-services.json");
             var sourceGoogleJson = path.join($projectData.appResourcesDirectoryPath, "Android", "google-services.json");
@@ -52,19 +50,19 @@ return new Promise(function(resolve, reject) {
 
             // copy correct version to destination
             if (fs.existsSync(sourceGoogleJson) && fs.existsSync(path.dirname(destinationGoogleJson))) {
-                $logger.info("Copy " + sourceGoogleJson + " to " + destinationGoogleJson + ".");
+                $logger.out("Copy " + sourceGoogleJson + " to " + destinationGoogleJson + ".");
                 fs.writeFileSync(destinationGoogleJson, fs.readFileSync(sourceGoogleJson));
                 resolve();
             } else if (fs.existsSync(sourceGoogleJson) && fs.existsSync(path.dirname(destinationGoogleJsonAlt))) {
                 // NativeScript < 4 doesn't have the 'app' folder
-                $logger.info("Copy " + sourceGoogleJson + " to " + destinationGoogleJsonAlt + ".");
+                $logger.out("Copy " + sourceGoogleJson + " to " + destinationGoogleJsonAlt + ".");
                 fs.writeFileSync(destinationGoogleJsonAlt, fs.readFileSync(sourceGoogleJson));
                 resolve();
             } else {
                 $logger.warn("Unable to copy google-services.json.");
                 reject();
             }
-        } else if (platform === 'ios') {
+        } else if (hookArgs.platform.toLowerCase() === 'ios') {
             // we have copied our GoogleService-Info.plist during before-checkForChanges hook, here we delete it to avoid changes in git
             var destinationGooglePlist = path.join($projectData.appResourcesDirectoryPath, "iOS", "GoogleService-Info.plist");
             var sourceGooglePlistProd = path.join($projectData.appResourcesDirectoryPath, "iOS", "GoogleService-Info.plist.prod");
