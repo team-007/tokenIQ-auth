@@ -126,7 +126,7 @@ function PushNotification() {
                     // may be null/undefined if not known yet
                     console.log('App push token: ', token);
                     alert({
-                        title: "Current Push Registration Token",
+                        title: "Your Push Registration Token",
                         message: (!token ? "Not received yet" : ("Token: \n\n") + token),
                         okButtonText: "OK, thx"
                     }).then(resolve);

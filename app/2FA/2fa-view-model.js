@@ -21,25 +21,19 @@ function goToLoginPage() {
 }
 
 function TwoFAViewModel() {
-    let USER = null;
     let isLoading = false;
-
-    this.setUser = user => {
-        console.log('setting user in 2fa-model ...');
-        USER = user
-    };
 
     const viewModel = observableModule.fromObject({
         isLoading,
+
         verify() {
             viewModel.isLoading = true;
 
             let code = viewModel.get('twofacode');
 
             //TODO: for testing UI
-            console.log(`Got code: ${code}`);
             viewModel.isLoading = false;
-            goToPushNotificationPage(USER);
+            goToPushNotificationPage(viewModel.get('user'));
 
             // uncomment below when done testing UI
             // http.request({
@@ -57,7 +51,9 @@ function TwoFAViewModel() {
             //     goToPushNotificationPage(USER)
             // }, console.error)
         }
-    })
+    });
+
+    return viewModel;
 }
 
 module.exports = TwoFAViewModel;

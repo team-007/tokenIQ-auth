@@ -6,19 +6,8 @@ const ActivityIndicator = require("tns-core-modules/ui/activity-indicator").Acti
 const frameModule = require("tns-core-modules/ui/frame");
 const topmost = require('tns-core-modules/ui/frame').topmost;
 
-// function goToPushNotificationPage(user) {
-//     topmost().navigate({
-//         moduleName: 'push-notification/push-notification-page',
-//         clearHistory: true,
-//         context: {
-//             username: user.username,
-//             usertoken: user.token
-//         }
-//     })
-// }
 
 function goTo2FAPage(user) {
-    console.log('got user in login: ', user);
     topmost().navigate({
         moduleName: '2FA/2fa-page',
         clearHistory: true,
