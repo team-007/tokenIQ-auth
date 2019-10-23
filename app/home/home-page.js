@@ -33,6 +33,7 @@ function pageLoaded(args) {
     https://docs.nativescript.org/core-concepts/data-binding.
     */
   page.bindingContext = homeViewModel;
+  page.bindingContext.balance()
 }
 
 /*

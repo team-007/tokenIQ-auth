@@ -1,24 +1,60 @@
-<Page loaded="pageLoaded"  class="page" xmlns="http://www.nativescript.org/tns.xsd">
-	<ActionBar title="Groceries"></ActionBar>
-	<GridLayout rows="auto, *" xmlns:chart="nativescript-ui-chart" style="height: 1000px">
-		<chart:RadCartesianChart id="cartesianChart" style="height: 100%">
-			<chart:RadCartesianChart.series>
-				<chart:BarSeries items="{{ favoriteFruits }}" categoryProperty="type" valueProperty="count" seriesName="Bar">
-					<chart:BarSeries.horizontalAxis>
-						<chart:CategoricalAxis labelSize="40" labelMargin="10" />
-					</chart:BarSeries.horizontalAxis>
-					<chart:BarSeries.verticalAxis>
-						<chart:LinearAxis/>
-					</chart:BarSeries.verticalAxis>
-				</chart:BarSeries>
-			</chart:RadCartesianChart.series>
-			<chart:RadCartesianChart.palettes>
-				<chart:Palette seriesName="Bar">
-					<chart:Palette.entries>
-						<chart:PaletteEntry fillColor="#db5560" strokeColor="#bb1616" />
-					</chart:Palette.entries>
-				</chart:Palette>
-			</chart:RadCartesianChart.palettes>
-		</chart:RadCartesianChart>
-	</GridLayout>
+<Page loaded="pageLoaded"  class="page" xmlns="http://www.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview">
+    <ActionBar class="action-bar">
+        <Label text="TokenIQ" class="action-bar-label" />
+    </ActionBar>
+    <ActivityIndicator busy="{{ isLoading }}" />
+
+    <ScrollView class="page">
+        <StackLayout>
+            <!-- On Android the card view plugin requires adding an external library
+            therefore it can't be demoed on Playground. You will have to download this project
+            and build it locally to try it on Android -->
+            <Card:CardView class="card" elevation="40" radius="10" ios:shadowRadius="3">
+                <StackLayout class="card-layout">
+                    <Label class="h2" text="{{ user_balance.offer_name }}" />
+                    <Label class="body" textWrap="true" text="{{ user_balance.Amount }}" />
+                </StackLayout>
+            </Card:CardView>
+        </StackLayout>
+    </ScrollView>
+
+    <!--    <GridLayout rows="*">-->
+<!--        <lv:RadListView id="list-view" row="0" items="{{ user_balance }}" marginRight="-2" backgroundColor="#e6e6e6" itemLoading="{{ balance }}">-->
+<!--            <lv:RadListView.listViewLayout>-->
+<!--                <lv:ListViewStaggeredLayout scrollDirection="Vertical" spanCount="2" />-->
+<!--            </lv:RadListView.listViewLayout>-->
+<!--            <lv:RadListView.itemTemplate>-->
+<!--                <StackLayout margin="15" borderRadius="10">-->
+<!--                    <StackLayout backgroundColor="white" padding="10">-->
+<!--                        <Label text="{{ offer_name }}" class="item-name" textWrap="true" />-->
+<!--                        <Label text="{{ amount }}" class="item-desc" textWrap="true" />-->
+<!--                        <Label text="{{ shares }}" class="item-price" />-->
+<!--                    </StackLayout>-->
+<!--                </StackLayout>-->
+<!--            </lv:RadListView.itemTemplate>-->
+<!--        </lv:RadListView>-->
+<!--    </GridLayout>-->
+
+
+<!--	<GridLayout rows="auto, *" xmlns:chart="nativescript-ui-chart" style="height: 1000px">-->
+<!--		<chart:RadCartesianChart id="cartesianChart" style="height: 100%">-->
+<!--			<chart:RadCartesianChart.series>-->
+<!--				<chart:BarSeries items="{{ favoriteFruits }}" categoryProperty="type" valueProperty="count" seriesName="Bar">-->
+<!--					<chart:BarSeries.horizontalAxis>-->
+<!--						<chart:CategoricalAxis labelSize="40" labelMargin="10" />-->
+<!--					</chart:BarSeries.horizontalAxis>-->
+<!--					<chart:BarSeries.verticalAxis>-->
+<!--						<chart:LinearAxis/>-->
+<!--					</chart:BarSeries.verticalAxis>-->
+<!--				</chart:BarSeries>-->
+<!--			</chart:RadCartesianChart.series>-->
+<!--			<chart:RadCartesianChart.palettes>-->
+<!--				<chart:Palette seriesName="Bar">-->
+<!--					<chart:Palette.entries>-->
+<!--						<chart:PaletteEntry afillColor="#db5560" strokeColor="#bb1616" />-->
+<!--					</chart:Palette.entries>-->
+<!--				</chart:Palette>-->
+<!--			</chart:RadCartesianChart.palettes>-->
+<!--		</chart:RadCartesianChart>-->
+<!--	</GridLayout>-->
 </Page>

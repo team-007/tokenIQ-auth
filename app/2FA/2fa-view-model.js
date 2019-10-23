@@ -37,7 +37,7 @@ function TwoFAViewModel() {
 
             // uncomment below when done testing UI
             // http.request({
-            //     //TODO: update url
+            //     //TODO: update url for 2fa
             //     url: 'https://url',
             //     method: "POST",
             //     headers: { "Content-Type": "application/json" },
