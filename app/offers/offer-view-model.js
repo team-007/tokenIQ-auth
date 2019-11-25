@@ -3,14 +3,14 @@ const http = require('tns-core-modules/http');
 const {alert, confirm} = require("tns-core-modules/ui/dialogs");
 const topmost = require('tns-core-modules/ui/frame').topmost;
 
-function goToOfferPage(user) {
-    topmost().navigate({
-        moduleName: 'offers/offer-page',
-        clearHistory: true
-    })
+function goToHomePage() {
+  topmost().navigate({
+      moduleName: 'home/home-page',
+      clearHistory: true
+  })
 }
 
-function HomeViewModel() {
+function OfferViewModel() {
   const viewModel = observableModule.fromObject({
 
     user_balance: {
@@ -45,12 +45,12 @@ function HomeViewModel() {
           }
       }, console.error);
     },
-    offerTap() {
+    onNavBtnTap() {
         console.log("Share action item tapped.");
-        goToOfferPage();
+        goToHomePage();
     }
   });
   return viewModel;
 }
 
-module.exports = HomeViewModel;
+module.exports = OfferViewModel;

@@ -33,44 +33,47 @@ function LoginViewModel() {
             goTo2FAPage({username,password});
 
             // uncomment below when done testing UI
-            // http.request({
-            //     url: "https://dev-tiq-develop.pantheonsite.io/wp-json/aam/v1/authenticate",
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     content: JSON.stringify({
-            //         username: username,
-            //         password: password
-            //     })
-            // }).then((response) => {
-            //     let responseAsString = String(response.content);
-            //     if(responseAsString.substring(1, 9) === "<strong>" || responseAsString === '""') {
-            //         confirm({
-            //             title: 'Log In Error',
-            //             message: 'Error authenticating user with TokenIQ.',
-            //             okButtonText: 'Try test server',
-            //             cancelButtonText: 'Don\'t try test server'
-            //         }).then(result => {
-            //             if (!result) return;
-            //             http.request({
-            //                 url: "https://tokeniq.herokuapp.com/authenticate",
-            //                 method: "POST",
-            //                 headers: {"Content-Type": "application/json"},
-            //                 content: JSON.stringify({
-            //                     username: username,
-            //                     password: password
-            //                 })
-            //             }).then((response) => {
-            //                 if (response.statusCode !== 202) return alert('Error authenticating user with test server.');
-            //                 viewModel.isLoading = false;
-            //                 goTo2FAPage(response.content.toJSON())
-            //             }, console.error);
-            //         });
-            //     }
-            //     else {
-            //         viewModel.isLoading = false;
-            //         goTo2FAPage(response.content.toJSON())
-            //     }
-            // }, console.error);
+            /*
+            http.request({
+                url: "https://dev-tiq-develop.pantheonsite.io/wp-json/aam/v1/authenticate",
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                content: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            }).then((response) => {
+                let responseAsString = String(response.content);
+                console.log(responseAsString.substring(2,8));
+                if(responseAsString.substring(1, 9) === "<strong>" || responseAsString === '""' || responseAsString.substring(2,8) === "errors") {
+                    confirm({
+                        title: 'Log In Error',
+                        message: 'Error authenticating user with TokenIQ.',
+                        okButtonText: 'Try test server',
+                        cancelButtonText: 'Don\'t try test server'
+                    }).then(result => {
+                        if (!result) return;
+                        http.request({
+                            url: "https://tokeniq.herokuapp.com/authenticate",
+                            method: "POST",
+                            headers: {"Content-Type": "application/json"},
+                            content: JSON.stringify({
+                                username: username,
+                                password: password
+                            })
+                        }).then((response) => {
+                            if (response.statusCode !== 202) return alert('Error authenticating user with test server.');
+                            viewModel.isLoading = false;
+                            goTo2FAPage(response.content.toJSON())
+                        }, console.error);
+                    });
+                }
+                else {
+                    viewModel.isLoading = false;
+                    goTo2FAPage(response.content.toJSON())
+                }
+            }, console.error);
+            */
         },
         signup() {
             utilityModule.openUrl('https://wordpress.com/start/user?ref=homepage');

@@ -1,6 +1,6 @@
-<Page loaded="pageLoaded"  class="page" xmlns="http://www.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview">
-    <ActionBar class="action-bar">
-        <Label text="TokenIQ" class="action-bar-label" />
+<Page loaded="pageLoaded"  class="page" xmlns="http://www.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview" style="background-color:rgb(150,150,150)">
+    <ActionBar class="action-bar" title="TokenIQ Wallet" style="background-color:rgb(47,199,209)">
+      <ActionItem tap="{{ offerTap }}" text="Review Offers" ios.systemIcon="9" android.systemIcon="btn_dropdown" android.position="popup" ios.position="right"></ActionItem>
     </ActionBar>
     <ActivityIndicator busy="{{ isLoading }}" />
 
@@ -9,52 +9,90 @@
             <!-- On Android the card view plugin requires adding an external library
             therefore it can't be demoed on Playground. You will have to download this project
             and build it locally to try it on Android -->
-            <Card:CardView class="card" elevation="40" radius="10" ios:shadowRadius="3">
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
                 <StackLayout class="card-layout">
-                    <Label class="h2" text="{{ user_balance.offer_name }}" />
-                    <Label class="body" textWrap="true" text="{{ user_balance.Amount }}" />
+                    <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                    <Label class="h2" text="{{ 'Offer Name: ' + user_balance.offer_name }}" textDecoration="underline"/>
+                    <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                    <Label class="h2" textWrap="true" text="{{ 'User Amount: ' + user_balance.Amount }}" />
+                    <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                    <Label class="body" textWrap="true" text="{{ 'User Shares: ' + user_balance.shares }}" />
+                    <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                    <Label class="body" textWrap="true" text="{{ 'User Equity: ' + user_equity }}" />
                 </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3" style="background-color:rgb(230,230,230)">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Gorbyte' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Shares: 20' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Equity: 15%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Measured Risk' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <Label class="h2" textWrap="true" text="{{ 'User Amount: 7649245' }}" />
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Shares: 30' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Equity: 5%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3" style="background-color:rgb(230,230,230)">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Mint Airways' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <Label class="h2" textWrap="true" text="{{ 'User Amount: 47386448' }}" />
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Shares: 50' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Equity: 25%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Scratch Foundation' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <Label class="h2" textWrap="true" text="{{ 'User Amount: 45657357' }}" />
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Shares: 15' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Equity: 15%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3" style="background-color:rgb(230,230,230)">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Mission Space' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <Label class="h2" textWrap="true" text="{{ 'User Amount: 47386448' }}" />
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Shares: 50' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Equity: 25%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: TNS' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <Label class="h2" textWrap="true" text="{{ 'User Amount: 45657357' }}" />
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Shares: 15' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'User Equity: 15%' }}" />
+              </StackLayout>
             </Card:CardView>
         </StackLayout>
     </ScrollView>
-
-    <!--    <GridLayout rows="*">-->
-<!--        <lv:RadListView id="list-view" row="0" items="{{ user_balance }}" marginRight="-2" backgroundColor="#e6e6e6" itemLoading="{{ balance }}">-->
-<!--            <lv:RadListView.listViewLayout>-->
-<!--                <lv:ListViewStaggeredLayout scrollDirection="Vertical" spanCount="2" />-->
-<!--            </lv:RadListView.listViewLayout>-->
-<!--            <lv:RadListView.itemTemplate>-->
-<!--                <StackLayout margin="15" borderRadius="10">-->
-<!--                    <StackLayout backgroundColor="white" padding="10">-->
-<!--                        <Label text="{{ offer_name }}" class="item-name" textWrap="true" />-->
-<!--                        <Label text="{{ amount }}" class="item-desc" textWrap="true" />-->
-<!--                        <Label text="{{ shares }}" class="item-price" />-->
-<!--                    </StackLayout>-->
-<!--                </StackLayout>-->
-<!--            </lv:RadListView.itemTemplate>-->
-<!--        </lv:RadListView>-->
-<!--    </GridLayout>-->
-
-
-<!--	<GridLayout rows="auto, *" xmlns:chart="nativescript-ui-chart" style="height: 1000px">-->
-<!--		<chart:RadCartesianChart id="cartesianChart" style="height: 100%">-->
-<!--			<chart:RadCartesianChart.series>-->
-<!--				<chart:BarSeries items="{{ favoriteFruits }}" categoryProperty="type" valueProperty="count" seriesName="Bar">-->
-<!--					<chart:BarSeries.horizontalAxis>-->
-<!--						<chart:CategoricalAxis labelSize="40" labelMargin="10" />-->
-<!--					</chart:BarSeries.horizontalAxis>-->
-<!--					<chart:BarSeries.verticalAxis>-->
-<!--						<chart:LinearAxis/>-->
-<!--					</chart:BarSeries.verticalAxis>-->
-<!--				</chart:BarSeries>-->
-<!--			</chart:RadCartesianChart.series>-->
-<!--			<chart:RadCartesianChart.palettes>-->
-<!--				<chart:Palette seriesName="Bar">-->
-<!--					<chart:Palette.entries>-->
-<!--						<chart:PaletteEntry afillColor="#db5560" strokeColor="#bb1616" />-->
-<!--					</chart:Palette.entries>-->
-<!--				</chart:Palette>-->
-<!--			</chart:RadCartesianChart.palettes>-->
-<!--		</chart:RadCartesianChart>-->
-<!--	</GridLayout>-->
 </Page>

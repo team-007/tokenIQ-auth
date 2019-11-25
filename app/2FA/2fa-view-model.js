@@ -27,13 +27,15 @@ function TwoFAViewModel() {
         isLoading,
 
         verify() {
-            viewModel.isLoading = true;
-
             let code = viewModel.get('twofacode');
-
+            if(!code) {
+              goToLoginPage();
+            }
             //TODO: for testing UI
-            viewModel.isLoading = false;
-            goToPushNotificationPage(viewModel.get('user'));
+            else {
+              viewModel.isLoading = false;
+              goToPushNotificationPage(viewModel.get('user'));
+            }
 
             // uncomment below when done testing UI
             // http.request({

@@ -1,0 +1,88 @@
+<Page loaded="pageLoaded" class="page" xmlns="http://www.nativescript.org/tns.xsd" xmlns:Card="nativescript-cardview" style="background-color:rgb(150,150,150)">
+    <ActivityIndicator busy="{{ isLoading }}" />
+    <Page.actionBar>
+        <ActionBar title="Potential Offers" style="background-color:rgb(47,199,209)">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="{{ onNavBtnTap }}"/>
+      </ActionBar>
+    </Page.actionBar>
+    <!-- Each page can have only a single root view -->
+    <ScrollView class="page">
+        <StackLayout>
+            <!-- On Android the card view plugin requires adding an external library
+            therefore it can't be demoed on Playground. You will have to download this project
+            and build it locally to try it on Android -->
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Mission Space' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <!--<Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />-->
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Shares: 20' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Equity: 15%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3" style="background-color:rgb(230,230,230)">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Prime Trust' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <!--<Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />-->
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Shares: 30' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Equity: 5%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: AnchorUSD' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <!--<Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />-->
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Shares: 50' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Equity: 25%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3" style="background-color:rgb(230,230,230)">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Sploda' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <!--<Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />-->
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Shares: 15' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Equity: 15%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: Stellar' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <!--<Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />-->
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Shares: 25' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Equity: 17.5%' }}" />
+              </StackLayout>
+            </Card:CardView>
+            <Card:CardView class="card" margin ="5" elevation="50" radius="1" ios:shadowRadius="3" style="background-color:rgb(230,230,230)">
+              <StackLayout class="card-layout">
+                  <!--<Label class="h2" text="Offer Name:" textDecoration="underline"/>-->
+                  <Label class="h2" text="{{ 'Offer Name: MAS Capital' }}" textDecoration="underline"/>
+                  <!--<Label class="h2" text="User Amount:" textDecoration="underline"/>-->
+                  <!--<Label class="h2" textWrap="true" text="{{ 'User Amount: 8937987' }}" />-->
+                  <!--<Label class="h2" text="User Shares:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Shares: 10' }}" />
+                  <!--<Label class="h2" text="User Equity:" textDecoration="underline"/>-->
+                  <Label class="body" textWrap="true" text="{{ 'Available Equity: 5%' }}" />
+              </StackLayout>
+            </Card:CardView>
+        </StackLayout>
+    </ScrollView>
+</Page>
