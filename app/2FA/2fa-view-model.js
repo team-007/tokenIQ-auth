@@ -1,6 +1,7 @@
 const observableModule = require("tns-core-modules/data/observable");
 const http = require('tns-core-modules/http');
 const topmost = require('tns-core-modules/ui/frame').topmost;
+const webViewModule = require("tns-core-modules/ui/web-view");
 
 function goToPushNotificationPage(user) {
     topmost().navigate({
@@ -22,9 +23,13 @@ function goToLoginPage() {
 
 function TwoFAViewModel() {
     let isLoading = false;
+    let showRecaptcha = true;
+    let show2faInput = false;
 
     const viewModel = observableModule.fromObject({
         isLoading,
+        showRecaptcha,
+        show2faInput,
 
         verify() {
             let code = viewModel.get('twofacode');
@@ -54,6 +59,10 @@ function TwoFAViewModel() {
             // }, console.error)
         }
     });
+
+    viewModel.set("webViewSrc", "https://google.com/");
+    viewModel.set("result", "");
+    viewModel.set("tftext", "https://google.com/");
 
     return viewModel;
 }

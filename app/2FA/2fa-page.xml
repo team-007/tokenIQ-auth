@@ -1,14 +1,26 @@
 <Page loaded="pageLoaded" class="page" actionBarHidden="true" xmlns="http://www.nativescript.org/tns.xsd">
     <FlexboxLayout class="page">
-        <StackLayout class="form">
+<!--    <FlexboxLayout class="page" visibility="{{ show2faInput ? 'visible' : 'collapsed' }}">-->
+        <StackLayout class="form" visibility="{{ show2faInput ? 'visible' : 'collapsed' }}">
             <Image class="logo" src="~/images/logo.png"/>
             <StackLayout class="input-field">
                 <TextField text="{{ twofacode }}" class="input" keyboardType="number" hint="Verification Code" autocorrect="false" autocapitalizationType="none"/>
             </StackLayout>
 
             <Button text="Verify" tap="{{ verify }}" class="btn btn-primary m-t-20"/>
-            <ActivityIndicator busy="{{ isLoading }}" />
+<!--            <ActivityIndicator busy="{{ isLoading }}" />-->
 
         </StackLayout>
+        <StackLayout visibility="{{ showRecaptcha ? 'visible' : 'collapsed' }}">
+            <GridLayout rows="75 * 50">
+                <GridLayout row="0" rows="*" columns="50 * 50" class="form">
+                    <TextField row="0" col="1" id="urlField" hint="Enter URL" text="{{ tftext }}" returnKeyType="done" returnPress="submit"
+                               autocorrect="false" verticalAlignment="center" class="input input-border m-t-0" autocapitalizationType="none"/>
+                </GridLayout>
+                <WebView row="1" loaded="onWebViewLoaded" id="myWebView" src="{{ webViewSrc }}" />
+                <Label row="2" text="{{ result }}" />
+            </GridLayout>
+        </StackLayout>
     </FlexboxLayout>
+
 </Page>
