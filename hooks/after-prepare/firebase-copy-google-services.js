@@ -61,7 +61,7 @@ return new Promise(function(resolve, reject) {
                 fs.writeFileSync(destinationGoogleJsonAlt, fs.readFileSync(sourceGoogleJson));
                 resolve();
             } else {
-                $logger.warn("Unable to copy google-services.json.");
+                $logger.warn("Unable to copy google-services.json. You need this file, because the Google Services Plugin cannot function without it..");
                 reject();
             }
         } else if (platform === 'ios') {
