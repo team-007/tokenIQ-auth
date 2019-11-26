@@ -3,8 +3,6 @@ const webViewModule = require("tns-core-modules/ui/web-view");
 
 const twoFAViewModel = new TwoFAViewModel();
 
-//TODO: open webview to trigger firebase,
-// then send to 2FAPage on success
 exports.pageLoaded = function (args) {
     const page = args.object;
     let navigationContext = page.navigationContext;
@@ -19,24 +17,22 @@ exports.pageLoaded = function (args) {
 };
 
 exports.onWebViewLoaded = (webargs) => {
-    const page = webargs.object.page;
     const webview = webargs.object;
-    twoFAViewModel.set("result", "loading recaptcha ...");
-    twoFAViewModel.set("enabled", false);
+    twoFAViewModel.set("result", "Loading Verification Page ...");
 
     webview.on(webViewModule.WebView.loadFinishedEvent, (args) => {
         let message = "";
         if (!args.error) {
-            message = `WebView finished loading of ${args.url}`;
+            message = `Finished Loading Verification Page`;
         } else {
             message = `Error loading ${args.url} : ${args.error}`;
         }
 
         twoFAViewModel.set("result", message);
-        console.log(`WebView message - ${message}`);
-        setTimeout(() => {
+
+        if (args.url.trim() === 'https://www.tokeniq.io/') {
             twoFAViewModel.set('show2faInput', true);
             twoFAViewModel.set('showRecaptcha', false);
-        }, 5000)
+        }
     });
 };

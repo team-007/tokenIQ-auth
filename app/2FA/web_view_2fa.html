@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Send 2FA Code</title>
+</head>
+<body>
+    <h1>Verify Phone Number</h1>
+    <div class="verify-code" style="display: none;">
+        <input type="number" value="Verification Code"/>
+        <button>Verify</button>
+    </div>
+    <!-- Do NOT remove below div tag -->
+    <div id="recaptcha-container"></div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+    window.onload = () => {
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAwngnvYjLZWcNf_OA5q9AFFnaZ1kaAcrE",
+            authDomain: "tokeniqcapstone.firebaseapp.com",
+            databaseURL: "https://tokeniqcapstone.firebaseio.com",
+            projectId: "tokeniqcapstone",
+            storageBucket: "tokeniqcapstone.appspot.com",
+            messagingSenderId: "1054476361904",
+            appId: "1:1054476361904:web:3197b63bb1cc0aaa105b75"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        firebase.auth().useDeviceLanguage();
+
+        let recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+            'size': 'normal',
+            'callback': function(response) {
+                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                // ...
+
+                // hide reCaptcha
+                document.querySelector('#recaptcha-container').setAttribute('style', 'display: none;');
+                sendCode()
+            },
+            'expired-callback': function() {
+                // Response expired. Ask user to solve reCAPTCHA again.
+                // ...
+            }
+        });
+
+        recaptchaVerifier.render().then(function(widgetId) {
+            window.recaptchaWidgetId = widgetId;
+        });
+
+        function sendCode() {
+            let appVerifier = recaptchaVerifier;
+            document.querySelector('h1.test').innerText = 'reCaptcha 2';
+
+            //WARNING: EDIT PHONE NUMBER
+            let phoneNumber = '+16667778888';
+            firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                .then(function (confirmationResult) {
+                    // SMS sent. Prompt user to type the code from the message, then sign the
+                    // user in with confirmationResult.confirm(code).
+                    document.querySelector('h1.test').innerText = 'reCaptcha 3';
+                    //TODO: show input field here
+                    document.querySelector('div.verify-code').setAttribute('style', 'display: block;');
+                    document.querySelector('div.verify-code button').addEventListener('click', e => {
+                        let input = document.querySelector('div.verify-code input');
+                        console.log(input.value);
+                        confirmationResult.confirm(input.value).then(result => {
+                            console.log(result.user);
+
+                            //WARNING: don't change the url below
+                            document.location = 'https://www.tokeniq.io/'
+                        }).catch(function (error) {
+                            // User couldn't sign in (bad verification code?)
+                            // ...
+                        });
+                    });
+                }).catch(function (error) {
+                // Error; SMS not sent, redo reCaptcha
+                // ...
+                // recaptchaVerifier.render().then(function(widgetId) {
+                //     grecaptcha.reset(widgetId);
+                // }
+                console.log('auth error', error)
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

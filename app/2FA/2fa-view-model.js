@@ -1,7 +1,5 @@
 const observableModule = require("tns-core-modules/data/observable");
-const http = require('tns-core-modules/http');
 const topmost = require('tns-core-modules/ui/frame').topmost;
-const webViewModule = require("tns-core-modules/ui/web-view");
 
 function goToPushNotificationPage(user) {
     topmost().navigate({
@@ -60,9 +58,15 @@ function TwoFAViewModel() {
         }
     });
 
-    viewModel.set("webViewSrc", "https://google.com/");
+    //TODO: one way to insert phone number to web page is to have
+    // 'webpage' as a string as follows
+    // let phoneNumber = 123
+    // let webpage = `<html> ${phoneNumber} </html>`
+
+    let webpage = require('./web_view_2fa.html');
+    viewModel.set("webViewSrc", webpage);
     viewModel.set("result", "");
-    viewModel.set("tftext", "https://google.com/");
+    viewModel.set("tftext", "Code Verification");
 
     return viewModel;
 }
